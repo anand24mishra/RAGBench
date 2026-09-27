@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e . -r requirements.txt
+      - run: ruff format --check .
+      - run: ruff check .
+      - run: pytest
+
+  regression-gate:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e . -r requirements.txt
+      - name: Run Deterministic Evaluation
+        run: |
+          mkdir -p /tmp/ci_eval
+          python -m ragbench.eval_generation \
+            --dataset evaluation/dataset/v1.1.0/questions.jsonl \
+            --corpus-dir data/corpus \
+            --output-dir /tmp/ci_eval \
+            --experiment-id ci-candidate
+      - name: Execute Regression Detection Gate
+        run: |
+          python -m ragbench.regression_gate \
+            --baseline evaluation/reports/generation_v4_baseline.json \
+            --candidate /tmp/ci_eval/ci-candidate.json \
+            --output-json /tmp/ci_eval/regression_decision.json \
+            --output-md /tmp/ci_eval/regression_report.md
