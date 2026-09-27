@@ -16,8 +16,9 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     qdrant_url: str = "http://localhost:6333"
     qdrant_api_key: SecretStr | None = None
-    qdrant_collection: str = "ragbench_documents"
-    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
+    qdrant_collection: str = "ragbench_documents_bge"
+    embedding_provider: str = "fastembed"
+    embedding_model: str = "BAAI/bge-small-en-v1.5"
     embedding_batch_size: int = Field(default=32, gt=0)
     top_k: int = Field(default=5, gt=0, le=100)
     chunk_size: int = Field(default=800, gt=0)
@@ -31,6 +32,19 @@ class Settings(BaseSettings):
     llm_timeout_seconds: float = Field(default=30.0, gt=0)
     llm_temperature: float = Field(default=0.0, ge=0, le=2)
     llm_max_tokens: int = Field(default=500, gt=0)
+
+    @field_validator("embedding_provider")
+    @classmethod
+    def normalize_embedding_provider(cls, value: str) -> str:
+        cleaned = value.strip().lower()
+        if cleaned in {"sentence_transformers", "sentence-transformers"}:
+            return "sentence-transformers"
+        if cleaned == "fastembed":
+            return "fastembed"
+        raise ValueError(
+            f"Unsupported EMBEDDING_PROVIDER: '{value}'. "
+            "Must be 'fastembed' or 'sentence-transformers'"
+        )
 
     @field_validator("llm_provider")
     @classmethod

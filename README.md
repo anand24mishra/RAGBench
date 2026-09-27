@@ -58,7 +58,21 @@ flowchart TD
     GE --> A
 ```
 
-The API and Qdrant run as separate containers in the development stack. Embedding is local CPU or accelerator work performed by `sentence-transformers`. Generation is an asynchronous HTTP call through the implemented OpenAI-compatible provider. Reranking and hybrid retrieval are not implemented.
+The API and Qdrant run as separate services in development (Docker) or production (FastAPI on Render Free + Qdrant Cloud).
+
+### Embedding Runtime Separation (Production vs. Evaluation)
+
+- **Production API**:
+  - **Provider & Model**: `FastEmbedEmbedder` + `BAAI/bge-small-en-v1.5`
+  - **Runtime**: ONNX Runtime (`fastembed>=0.7,<1`, CPU inference without PyTorch/CUDA overhead)
+  - **Memory Footprint**: ~85 MB idle, ~240 MB peak active inference (fits within Render Free's 512 MB RAM limit)
+  - **Default Qdrant Collection**: `ragbench_documents_bge` (384-dimensional cosine distance, preventing vector space contamination with older models)
+- **Evaluation & Historical Experiments**:
+  - **Provider & Model**: `SentenceTransformerEmbedder` + historical `sentence-transformers/all-MiniLM-L6-v2` baseline
+  - **Runtime**: PyTorch + `sentence-transformers` (declared in `requirements-eval.txt`)
+  - **Purpose**: Full reproducibility of historical evaluation reports, benchmark metrics, and ablation studies
+
+Generation is an asynchronous HTTP call through the implemented OpenAI-compatible provider. Reranking and hybrid retrieval are not implemented.
 
 See [Architecture](docs/architecture.md) for component contracts and failure boundaries.
 
@@ -226,7 +240,8 @@ In the V4 baseline generation run, 13 generation failures were identified (all m
 │   ├── integration
 │   └── unit
 ├── pyproject.toml
-└── requirements.txt
+├── requirements.txt         # Production runtime (FastEmbed, no PyTorch)
+└── requirements-eval.txt    # Evaluation & historical benchmarks (SentenceTransformers + PyTorch)
 ```
 
 ## Running locally
@@ -237,7 +252,9 @@ Prerequisites:
 - Docker with Compose for Qdrant
 - an API key for the configured OpenAI-compatible provider when generation is required
 
-Create the environment and install the package:
+Create the environment and install dependencies:
+
+**For Production API (Lightweight, FastEmbed):**
 
 ```bash
 python3 -m venv .venv
@@ -247,12 +264,44 @@ python -m pip install -e . -r requirements.txt
 cp .env.example .env
 ```
 
+**For Evaluation & Historical Benchmark Reproducibility:**
+
+```bash
+python -m pip install -r requirements-eval.txt
+```
+
 Start Qdrant and the API:
 
 ```bash
 docker compose up -d qdrant
 uvicorn ragbench.app.main:app --reload
 ```
+
+## Production Deployment (Render Free)
+
+RAGBench is designed to run cleanly on Render Free (512 MB RAM limit):
+
+1. **Repository Settings**:
+   - **Environment**: Python 3.11+
+   - **Build Command**:
+     ```bash
+     pip install --upgrade pip && pip install -r requirements.txt
+     ```
+     *(Installs FastEmbed with ONNX Runtime; PyTorch and CUDA dependencies are completely omitted).*
+   - **Start Command**:
+     ```bash
+     uvicorn ragbench.app.main:app --host 0.0.0.0 --port 10000
+     ```
+
+2. **Environment Variables**:
+   - `QDRANT_URL`: URL to your Qdrant Cloud cluster (e.g. `https://xxxx.cloud.qdrant.io:6333`)
+   - `QDRANT_API_KEY`: API key for Qdrant Cloud
+   - `QDRANT_COLLECTION`: `ragbench_documents_bge` (ensures 384-d BGE vectors do not mix with older models)
+   - `EMBEDDING_PROVIDER`: `fastembed`
+   - `EMBEDDING_MODEL`: `BAAI/bge-small-en-v1.5`
+   - `LLM_API_KEY`: API key for the LLM provider
+   - `LLM_PROVIDER`: `openai` (or `mock` for testing)
+   - `LLM_MODEL`: `gpt-4o-mini`
 
 ## Testing
 

@@ -15,7 +15,10 @@ async def get_system_config(request: Request) -> dict[str, Any]:
     chunk_size = getattr(settings, "chunk_size", 800) if settings else 800
     chunk_overlap = getattr(settings, "chunk_overlap", 100) if settings else 100
     top_k = getattr(settings, "top_k", 5) if settings else 5
-    default_embed = "sentence-transformers/all-MiniLM-L6-v2"
+    default_embed = "BAAI/bge-small-en-v1.5"
+    embedding_provider = (
+        getattr(settings, "embedding_provider", "fastembed") if settings else "fastembed"
+    )
     embedding_model = (
         getattr(settings, "embedding_model", default_embed) if settings else default_embed
     )
@@ -30,6 +33,7 @@ async def get_system_config(request: Request) -> dict[str, Any]:
             "chunk_size": chunk_size,
             "chunk_overlap": chunk_overlap,
             "top_k": top_k,
+            "embedding_provider": embedding_provider,
             "embedding_model": embedding_model,
             "generation_model": gen_model,
             "vector_store": "qdrant",

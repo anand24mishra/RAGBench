@@ -4,7 +4,12 @@ from dataclasses import dataclass
 
 from ragbench.app.context.builder import ContextBuilder
 from ragbench.app.core.config import Settings
-from ragbench.app.embeddings.embedder import SentenceTransformerEmbedder
+from ragbench.app.domain.errors import ConfigurationError
+from ragbench.app.embeddings.embedder import (
+    Embedder,
+    FastEmbedEmbedder,
+    SentenceTransformerEmbedder,
+)
 from ragbench.app.generation.base import LLMProvider
 from ragbench.app.generation.factory import create_llm_provider
 from ragbench.app.ingestion.chunker import FixedSizeChunker
@@ -28,11 +33,24 @@ class AppServices:
         await self.vector_store.close()
 
 
+def create_embedder(settings: Settings) -> Embedder:
+    provider = settings.embedding_provider.lower().strip()
+    if provider == "fastembed":
+        return FastEmbedEmbedder(
+            model_name=settings.embedding_model,
+            batch_size=settings.embedding_batch_size,
+            lazy_load=True,
+        )
+    if provider in {"sentence-transformers", "sentence_transformers"}:
+        return SentenceTransformerEmbedder(
+            model_name=settings.embedding_model,
+            batch_size=settings.embedding_batch_size,
+        )
+    raise ConfigurationError(f"Unsupported embedding provider: '{settings.embedding_provider}'")
+
+
 async def build_services(settings: Settings) -> AppServices:
-    embedder = SentenceTransformerEmbedder(
-        settings.embedding_model,
-        batch_size=settings.embedding_batch_size,
-    )
+    embedder = create_embedder(settings)
     qdrant_key = settings.qdrant_api_key.get_secret_value() if settings.qdrant_api_key else None
     vector_store = QdrantVectorStore(
         settings.qdrant_url,
