@@ -239,6 +239,18 @@ async def test_same_configuration_and_same_dataset_produce_equivalent_evaluation
         await store2.close()
 
 
+try:
+    import sentence_transformers  # noqa: F401
+
+    HAS_SENTENCE_TRANSFORMERS = True
+except ImportError:
+    HAS_SENTENCE_TRANSFORMERS = False
+
+
+@pytest.mark.skipif(
+    not HAS_SENTENCE_TRANSFORMERS,
+    reason="sentence-transformers required for historical experiments",
+)
 @pytest.mark.asyncio
 async def test_chunking_experiment_execution(tmp_path: Path) -> None:
     from ragbench.experiments.config import load_experiment_config

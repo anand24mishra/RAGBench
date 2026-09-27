@@ -13,5 +13,6 @@ export async function ingestDocument(file: File): Promise<IngestResponse> {
   return requestJson<IngestResponse>('/ingest', {
     method: 'POST',
     body: formData as any,
+    timeoutMs: 120000,
   })
 }

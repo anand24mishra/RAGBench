@@ -285,9 +285,9 @@ RAGBench is designed to run cleanly on Render Free (512 MB RAM limit):
    - **Environment**: Python 3.11+
    - **Build Command**:
      ```bash
-     pip install --upgrade pip && pip install -r requirements.txt
+     pip install --upgrade pip && pip install -r requirements.txt && python -c "from fastembed import TextEmbedding; TextEmbedding('BAAI/bge-small-en-v1.5')"
      ```
-     *(Installs FastEmbed with ONNX Runtime; PyTorch and CUDA dependencies are completely omitted).*
+     *(Installs FastEmbed with ONNX Runtime and pre-caches model weights at build time; PyTorch and CUDA dependencies are completely omitted).*
    - **Start Command**:
      ```bash
      uvicorn ragbench.app.main:app --host 0.0.0.0 --port 10000

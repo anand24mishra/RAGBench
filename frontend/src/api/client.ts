@@ -12,15 +12,20 @@ export class ApiError extends Error {
   }
 }
 
-const DEFAULT_TIMEOUT_MS = 15000
+export interface RequestOptions extends RequestInit {
+  timeoutMs?: number
+}
+
+const DEFAULT_TIMEOUT_MS = 60000
 
 export async function requestJson<T>(
   endpoint: string,
-  options: RequestInit = {},
+  options: RequestOptions = {},
   fallbackData?: T
 ): Promise<T> {
+  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS
   const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS)
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
 
   const headers = new Headers(options.headers || {})
   if (!headers.has('Content-Type') && options.body && typeof options.body === 'string') {
@@ -77,7 +82,7 @@ export async function requestJson<T>(
     }
 
     if (err instanceof DOMException && err.name === 'AbortError') {
-      throw new ApiError(`Request to ${endpoint} timed out after ${DEFAULT_TIMEOUT_MS}ms`, 504, 'timeout')
+      throw new ApiError(`Request to ${endpoint} timed out after ${timeoutMs}ms`, 504, 'timeout')
     }
 
     // If a fallback was provided and network is offline, gracefully return verified fallback

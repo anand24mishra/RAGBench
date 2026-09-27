@@ -161,6 +161,18 @@ def test_create_embedder_selects_fastembed_by_default() -> None:
     assert embedder.dimension == 384
 
 
+try:
+    import sentence_transformers  # noqa: F401
+
+    HAS_SENTENCE_TRANSFORMERS = True
+except ImportError:
+    HAS_SENTENCE_TRANSFORMERS = False
+
+
+@pytest.mark.skipif(
+    not HAS_SENTENCE_TRANSFORMERS,
+    reason="sentence-transformers is not installed in production runtime",
+)
 def test_create_embedder_selects_sentence_transformers_when_configured() -> None:
     settings = Settings(
         embedding_provider="sentence-transformers",
@@ -170,6 +182,19 @@ def test_create_embedder_selects_sentence_transformers_when_configured() -> None
     assert isinstance(embedder, SentenceTransformerEmbedder)
     assert embedder.model_name == "sentence-transformers/all-MiniLM-L6-v2"
     assert embedder.dimension == 384
+
+
+@pytest.mark.skipif(
+    HAS_SENTENCE_TRANSFORMERS,
+    reason="Only runs when sentence-transformers is not installed",
+)
+def test_create_embedder_sentence_transformers_fails_without_dependency() -> None:
+    settings = Settings(
+        embedding_provider="sentence-transformers",
+        embedding_model="sentence-transformers/all-MiniLM-L6-v2",
+    )
+    with pytest.raises(EmbeddingError, match="Failed to load embedding model"):
+        create_embedder(settings)
 
 
 def test_create_embedder_rejects_unsupported_provider() -> None:

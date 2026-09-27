@@ -44,16 +44,21 @@ def get_benchmark_environment() -> BenchmarkEnvironment:
     except ImportError:
         pass
 
+    software_versions = {
+        "ragbench": ragbench_version,
+    }
+    for pkg in ("qdrant-client", "fastembed", "sentence-transformers"):
+        try:
+            software_versions[pkg] = version(pkg)
+        except Exception:
+            pass
+
     return BenchmarkEnvironment(
         python_version=platform.python_version(),
         os_name=f"{platform.system()} {platform.release()}",
         cpu_architecture=platform.machine(),
         available_accelerator=accelerator,
-        software_versions={
-            "ragbench": ragbench_version,
-            "qdrant-client": version("qdrant-client"),
-            "sentence-transformers": version("sentence-transformers"),
-        },
+        software_versions=software_versions,
     )
 
 

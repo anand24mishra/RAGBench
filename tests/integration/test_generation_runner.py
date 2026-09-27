@@ -13,6 +13,18 @@ from tests.fakes import FakeLLMProvider
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent.parent
 
 
+try:
+    import sentence_transformers  # noqa: F401
+
+    HAS_SENTENCE_TRANSFORMERS = True
+except ImportError:
+    HAS_SENTENCE_TRANSFORMERS = False
+
+
+@pytest.mark.skipif(
+    not HAS_SENTENCE_TRANSFORMERS,
+    reason="sentence-transformers required for generation evaluation",
+)
 @pytest.mark.asyncio
 async def test_generation_evaluation_end_to_end_fake_llm(tmp_path: Path) -> None:
     result_path = tmp_path / "gen_eval.json"
