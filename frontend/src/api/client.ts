@@ -27,10 +27,13 @@ export async function requestJson<T>(
     headers.set('Content-Type', 'application/json')
   }
 
+  const envApiUrl = (import.meta as any).env?.VITE_API_URL
   const baseUrl =
-    typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null'
-      ? window.location.origin
-      : 'http://localhost:8000'
+    envApiUrl && typeof envApiUrl === 'string' && envApiUrl.trim() !== ''
+      ? envApiUrl.trim().replace(/\/+$/, '')
+      : typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null'
+        ? window.location.origin
+        : 'http://localhost:8000'
   const url = endpoint.startsWith('http') ? endpoint : `${baseUrl}${endpoint.startsWith('/') ? '' : '/'}${endpoint}`
 
   try {

@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     app_env: str = "development"
     log_level: str = "INFO"
     qdrant_url: str = "http://localhost:6333"
+    qdrant_api_key: SecretStr | None = None
     qdrant_collection: str = "ragbench_documents"
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     embedding_batch_size: int = Field(default=32, gt=0)

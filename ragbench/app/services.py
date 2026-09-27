@@ -33,7 +33,12 @@ async def build_services(settings: Settings) -> AppServices:
         settings.embedding_model,
         batch_size=settings.embedding_batch_size,
     )
-    vector_store = QdrantVectorStore(settings.qdrant_url, settings.qdrant_collection)
+    qdrant_key = settings.qdrant_api_key.get_secret_value() if settings.qdrant_api_key else None
+    vector_store = QdrantVectorStore(
+        settings.qdrant_url,
+        settings.qdrant_collection,
+        api_key=qdrant_key,
+    )
     await vector_store.ensure_collection(embedder.dimension)
     llm_provider = create_llm_provider(settings)
     ingestion = IngestionService(

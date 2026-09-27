@@ -16,6 +16,7 @@ class QdrantVectorStore(VectorStore):
         url: str | None,
         collection_name: str,
         *,
+        api_key: str | None = None,
         client: AsyncQdrantClient | None = None,
     ) -> None:
         self.collection_name = collection_name
@@ -24,7 +25,7 @@ class QdrantVectorStore(VectorStore):
         elif url in ("memory", ":memory:"):
             self._client = AsyncQdrantClient(location=":memory:")
         else:
-            self._client = AsyncQdrantClient(url=url)
+            self._client = AsyncQdrantClient(url=url, api_key=api_key)
 
     async def ensure_collection(self, dimension: int) -> None:
         try:
