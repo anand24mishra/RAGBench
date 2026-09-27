@@ -1,0 +1,128 @@
+{
+  "baseline_id": "generation-v4-baseline",
+  "candidate_id": "generation-v4-baseline",
+  "checks": [
+    {
+      "baseline": 0.857143,
+      "candidate": 0.857143,
+      "category": "quality",
+      "delta": 0.0,
+      "message": "recall_at_1 delta +0.0000 >= threshold -0.0500",
+      "metric": "recall_at_1",
+      "status": "pass",
+      "threshold": -0.05
+    },
+    {
+      "baseline": 0.964286,
+      "candidate": 0.964286,
+      "category": "quality",
+      "delta": 0.0,
+      "message": "recall_at_3 delta +0.0000 >= threshold -0.0500",
+      "metric": "recall_at_3",
+      "status": "pass",
+      "threshold": -0.05
+    },
+    {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "category": "quality",
+      "delta": 0.0,
+      "message": "recall_at_5 delta +0.0000 >= threshold -0.0200",
+      "metric": "recall_at_5",
+      "status": "pass",
+      "threshold": -0.02
+    },
+    {
+      "baseline": 0.907738,
+      "candidate": 0.907738,
+      "category": "quality",
+      "delta": 0.0,
+      "message": "mrr delta +0.0000 >= threshold -0.0200",
+      "metric": "mrr",
+      "status": "pass",
+      "threshold": -0.02
+    },
+    {
+      "baseline": 0.744048,
+      "candidate": 0.744048,
+      "category": "quality",
+      "delta": 0.0,
+      "message": "correctness delta +0.0000 >= threshold -0.0500",
+      "metric": "correctness",
+      "status": "pass",
+      "threshold": -0.05
+    },
+    {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "category": "quality",
+      "delta": 0.0,
+      "message": "faithfulness delta +0.0000 >= threshold -0.0500",
+      "metric": "faithfulness",
+      "status": "pass",
+      "threshold": -0.05
+    },
+    {
+      "baseline": 0.528571,
+      "candidate": 0.528571,
+      "category": "quality",
+      "delta": 0.0,
+      "message": "context_relevance delta +0.0000 >= threshold -0.0500",
+      "metric": "context_relevance",
+      "status": "pass",
+      "threshold": -0.05
+    },
+    {
+      "baseline": 0.501,
+      "candidate": 0.688,
+      "category": "latency",
+      "delta": 0.187,
+      "message": "Retrieval P95 latency regressed: +37.38% > +25.00%",
+      "metric": "retrieval_p95_ms",
+      "status": "fail",
+      "threshold": 0.25
+    },
+    {
+      "baseline": null,
+      "candidate": null,
+      "category": "cost",
+      "delta": null,
+      "message": "Cost accounting unavailable in baseline or candidate",
+      "metric": "cost_per_query",
+      "status": "inconclusive",
+      "threshold": null
+    },
+    {
+      "baseline": null,
+      "candidate": 0.4643,
+      "category": "reliability",
+      "delta": null,
+      "message": "Candidate failure rate 46.43% exceeded threshold 5.00%",
+      "metric": "failure_rate",
+      "status": "fail",
+      "threshold": 0.05
+    },
+    {
+      "baseline": null,
+      "candidate": 0.0,
+      "category": "reliability",
+      "delta": null,
+      "message": "Timeouts 0 <= 0",
+      "metric": "timeouts",
+      "status": "pass",
+      "threshold": 0.0
+    }
+  ],
+  "dataset_version": "1.1.0",
+  "diagnostics": [],
+  "metadata": {
+    "baseline_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "baseline_query_count": 28,
+    "candidate_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "candidate_query_count": 28,
+    "policy_name": "default_ragbench_policy"
+  },
+  "status": "fail",
+  "summary": "Regression check FAIL: 8 passed, 2 failed, 1 inconclusive. Regressed queries: 0.",
+  "warnings": []
+}

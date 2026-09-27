@@ -1,0 +1,407 @@
+{
+  "candidate_count": 1,
+  "changed_parameter": "top_k=1",
+  "corpus_documents": {
+    "chunking": "242f5cd5461c6f825871dab1d149532a92bea11b7057679e1d8c8979db7e6ba3",
+    "generation": "c579b8f9660838a34a7d9fa1e2f0ccb42010bc055e536c3921077c2169290e6c",
+    "ingestion": "2709cdb9a3c66297e072dece2e89a4dd6c7a9bcd6813dd96a8ed49b797b4cd0e",
+    "observability": "4e11d50d43bb2593e60e08531d81c0378c4f86e71e880401e5868c326e2aa42d",
+    "retrieval": "38141c4dca88bdedb39256161636d6c0e80b55ff938f7fac02f9be0df9e84176"
+  },
+  "dataset_fingerprint": "5eff675854e0f6b57af67128dc6501b1cf0a7cb2add49631218e824ca65c1988",
+  "dataset_name": "ragbench-v2-baseline",
+  "dataset_version": "1.0.0",
+  "decision": "Reject for this workload",
+  "embedding_dimension": 384,
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "experiment_id": "topk-1",
+  "failures": [
+    {
+      "expected_document": "generation",
+      "query_id": "q007",
+      "retrieval_scores": [
+        0.4699589523977211
+      ],
+      "retrieved_documents": [
+        "chunking"
+      ]
+    }
+  ],
+  "generation_evaluation": {
+    "metrics": [],
+    "status": "not_implemented"
+  },
+  "hypothesis": "Restricting retrieval to top_k=1 minimizes candidate count and search latency, but drops recall whenever the relevant passage is ranked lower than first.",
+  "interpretation": "On the current 10-question repository-specific benchmark, Recall@5 degraded by 0.1000. The candidate configuration dropped previously retrieved evidence.",
+  "metrics": {
+    "mrr": 0.9,
+    "recall_at_1": 0.9,
+    "recall_at_3": 0.9,
+    "recall_at_5": 0.9
+  },
+  "queries": [
+    {
+      "candidate_count": 1,
+      "embedding_ms": 6.311625009402633,
+      "query_id": "q001",
+      "question": "Which file formats does RAGBench V1 accept for ingestion?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "ingestion"
+      ],
+      "retrieval_ms": 0.3742909902939573,
+      "retrieved": [
+        {
+          "chunk_id": "8f5f386c0927499eeb362b78c1e2509cd50980394e819af10dd079f25d684301",
+          "document_id": "ingestion",
+          "rank": 1,
+          "raw_document_id": "2709cdb9a3c66297e072dece2e89a4dd6c7a9bcd6813dd96a8ed49b797b4cd0e",
+          "score": 0.7711763924154089
+        }
+      ],
+      "retrieved_documents": [
+        "ingestion"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 6.27095800882671,
+      "query_id": "q002",
+      "question": "How is a document ID calculated during ingestion?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "ingestion"
+      ],
+      "retrieval_ms": 0.2700829936657101,
+      "retrieved": [
+        {
+          "chunk_id": "8f5f386c0927499eeb362b78c1e2509cd50980394e819af10dd079f25d684301",
+          "document_id": "ingestion",
+          "rank": 1,
+          "raw_document_id": "2709cdb9a3c66297e072dece2e89a4dd6c7a9bcd6813dd96a8ed49b797b4cd0e",
+          "score": 0.3508922822289151
+        }
+      ],
+      "retrieved_documents": [
+        "ingestion"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 6.024541988153942,
+      "query_id": "q003",
+      "question": "What chunk size and overlap does the baseline use?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "chunking"
+      ],
+      "retrieval_ms": 0.2623330074129626,
+      "retrieved": [
+        {
+          "chunk_id": "30ec2eeea00f4d11cefd1de990c43028f645c445e4d0394128deee9721a71578",
+          "document_id": "chunking",
+          "rank": 1,
+          "raw_document_id": "242f5cd5461c6f825871dab1d149532a92bea11b7057679e1d8c8979db7e6ba3",
+          "score": 0.6925606229752461
+        }
+      ],
+      "retrieved_documents": [
+        "chunking"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 5.780583000159822,
+      "query_id": "q004",
+      "question": "How are chunk identifiers made deterministic?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "chunking"
+      ],
+      "retrieval_ms": 0.25933299912139773,
+      "retrieved": [
+        {
+          "chunk_id": "30ec2eeea00f4d11cefd1de990c43028f645c445e4d0394128deee9721a71578",
+          "document_id": "chunking",
+          "rank": 1,
+          "raw_document_id": "242f5cd5461c6f825871dab1d149532a92bea11b7057679e1d8c8979db7e6ba3",
+          "score": 0.4972885101130784
+        }
+      ],
+      "retrieved_documents": [
+        "chunking"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 6.57583300198894,
+      "query_id": "q005",
+      "question": "Which vector database and distance function are used for semantic retrieval?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "retrieval"
+      ],
+      "retrieval_ms": 0.26233399694319814,
+      "retrieved": [
+        {
+          "chunk_id": "b0033b1d2899d7529f2ac67aacb2100f6e7bc1516bb11cab66d4c390cd683475",
+          "document_id": "retrieval",
+          "rank": 1,
+          "raw_document_id": "38141c4dca88bdedb39256161636d6c0e80b55ff938f7fac02f9be0df9e84176",
+          "score": 0.4791925889147417
+        }
+      ],
+      "retrieved_documents": [
+        "retrieval"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 5.616041002213024,
+      "query_id": "q006",
+      "question": "Does the V1 retriever use hybrid search or reranking?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "retrieval"
+      ],
+      "retrieval_ms": 0.27704100648406893,
+      "retrieved": [
+        {
+          "chunk_id": "b0033b1d2899d7529f2ac67aacb2100f6e7bc1516bb11cab66d4c390cd683475",
+          "document_id": "retrieval",
+          "rank": 1,
+          "raw_document_id": "38141c4dca88bdedb39256161636d6c0e80b55ff938f7fac02f9be0df9e84176",
+          "score": 0.5002251528456696
+        }
+      ],
+      "retrieved_documents": [
+        "retrieval"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 6.3521670090267435,
+      "query_id": "q007",
+      "question": "What does the pipeline do when retrieval returns no chunks?",
+      "recall_at_1": 0.0,
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "reciprocal_rank": 0.0,
+      "relevant_documents": [
+        "generation"
+      ],
+      "retrieval_ms": 0.26183300360571593,
+      "retrieved": [
+        {
+          "chunk_id": "30ec2eeea00f4d11cefd1de990c43028f645c445e4d0394128deee9721a71578",
+          "document_id": "chunking",
+          "rank": 1,
+          "raw_document_id": "242f5cd5461c6f825871dab1d149532a92bea11b7057679e1d8c8979db7e6ba3",
+          "score": 0.4699589523977211
+        }
+      ],
+      "retrieved_documents": [
+        "chunking"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 5.623042001388967,
+      "query_id": "q008",
+      "question": "Which latency measurements are returned for a query?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "observability"
+      ],
+      "retrieval_ms": 0.2499999973224476,
+      "retrieved": [
+        {
+          "chunk_id": "d6b42922ea4baafc3dd921e23d1cfb44421a2408cf78ecd26af4f1bf4078919e",
+          "document_id": "observability",
+          "rank": 1,
+          "raw_document_id": "4e11d50d43bb2593e60e08531d81c0378c4f86e71e880401e5868c326e2aa42d",
+          "score": 0.4123447273937674
+        }
+      ],
+      "retrieved_documents": [
+        "observability"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 6.240417002118193,
+      "query_id": "q009",
+      "question": "Does application logging include full uploaded documents and user questions?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "observability"
+      ],
+      "retrieval_ms": 0.24966700584627688,
+      "retrieved": [
+        {
+          "chunk_id": "d6b42922ea4baafc3dd921e23d1cfb44421a2408cf78ecd26af4f1bf4078919e",
+          "document_id": "observability",
+          "rank": 1,
+          "raw_document_id": "4e11d50d43bb2593e60e08531d81c0378c4f86e71e880401e5868c326e2aa42d",
+          "score": 0.4315202895437679
+        }
+      ],
+      "retrieved_documents": [
+        "observability"
+      ]
+    },
+    {
+      "candidate_count": 1,
+      "embedding_ms": 6.944207998458296,
+      "query_id": "q010",
+      "question": "Where does the generation provider obtain its API key?",
+      "recall_at_1": 1.0,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "relevant_documents": [
+        "generation"
+      ],
+      "retrieval_ms": 0.2515420055715367,
+      "retrieved": [
+        {
+          "chunk_id": "184ab7c2f7c094c9dd7be221b3ad5238d8cab04c105161ed3b650b1c40bc9334",
+          "document_id": "generation",
+          "rank": 1,
+          "raw_document_id": "c579b8f9660838a34a7d9fa1e2f0ccb42010bc055e536c3921077c2169290e6c",
+          "score": 0.5986047619613701
+        }
+      ],
+      "retrieved_documents": [
+        "generation"
+      ]
+    }
+  ],
+  "query_count": 10,
+  "retriever_configuration": {
+    "chunk_overlap": 100,
+    "chunk_size": 800,
+    "distance": "cosine",
+    "embedding_batch_size": 32,
+    "normalized_embeddings": true,
+    "qdrant_mode": "memory",
+    "vector_store": "qdrant"
+  },
+  "schema_version": "3",
+  "software_versions": {
+    "python": "3.13.6",
+    "qdrant-client": "1.19.1",
+    "ragbench": "0.1.0",
+    "sentence-transformers": "5.4.1"
+  },
+  "timestamp": "2026-09-26T23:27:33.207139Z",
+  "timing": {
+    "embedding_latency": {
+      "max_ms": 6.944207998458296,
+      "mean_ms": 6.173941602173727,
+      "min_ms": 5.616041002213024,
+      "p50_ms": 6.2556875054724514,
+      "p95_ms": 6.778439250047086,
+      "p99_ms": 6.911054248776054,
+      "sample_size": 10
+    },
+    "query_latencies": [
+      {
+        "embedding_ms": 6.311625009402633,
+        "query_id": "q001",
+        "retrieval_ms": 0.3742909902939573,
+        "total_ms": 6.68591599969659
+      },
+      {
+        "embedding_ms": 6.27095800882671,
+        "query_id": "q002",
+        "retrieval_ms": 0.2700829936657101,
+        "total_ms": 6.54104100249242
+      },
+      {
+        "embedding_ms": 6.024541988153942,
+        "query_id": "q003",
+        "retrieval_ms": 0.2623330074129626,
+        "total_ms": 6.2868749955669045
+      },
+      {
+        "embedding_ms": 5.780583000159822,
+        "query_id": "q004",
+        "retrieval_ms": 0.25933299912139773,
+        "total_ms": 6.03991599928122
+      },
+      {
+        "embedding_ms": 6.57583300198894,
+        "query_id": "q005",
+        "retrieval_ms": 0.26233399694319814,
+        "total_ms": 6.838166998932138
+      },
+      {
+        "embedding_ms": 5.616041002213024,
+        "query_id": "q006",
+        "retrieval_ms": 0.27704100648406893,
+        "total_ms": 5.8930820086970925
+      },
+      {
+        "embedding_ms": 6.3521670090267435,
+        "query_id": "q007",
+        "retrieval_ms": 0.26183300360571593,
+        "total_ms": 6.614000012632459
+      },
+      {
+        "embedding_ms": 5.623042001388967,
+        "query_id": "q008",
+        "retrieval_ms": 0.2499999973224476,
+        "total_ms": 5.873041998711415
+      },
+      {
+        "embedding_ms": 6.240417002118193,
+        "query_id": "q009",
+        "retrieval_ms": 0.24966700584627688,
+        "total_ms": 6.4900840079644695
+      },
+      {
+        "embedding_ms": 6.944207998458296,
+        "query_id": "q010",
+        "retrieval_ms": 0.2515420055715367,
+        "total_ms": 7.195750004029833
+      }
+    ],
+    "retrieval_latency": {
+      "max_ms": 0.3742909902939573,
+      "mean_ms": 0.2718457006267272,
+      "min_ms": 0.24966700584627688,
+      "p50_ms": 0.2620830055093393,
+      "p95_ms": 0.3305284975795074,
+      "p99_ms": 0.36553849175106734,
+      "sample_size": 10
+    },
+    "sample_size": 10,
+    "total_runtime_ms": 64.63825001264922
+  },
+  "top_k": 1
+}

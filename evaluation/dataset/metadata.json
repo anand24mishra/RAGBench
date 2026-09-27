@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "name": "ragbench-v2-baseline",
+  "document_ids": [
+    "chunking",
+    "generation",
+    "ingestion",
+    "observability",
+    "retrieval"
+  ]
+}
