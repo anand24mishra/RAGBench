@@ -1,0 +1,16 @@
+experiment_id: embed-paraphrase-minilm-l3-v2
+dataset_version: 1.0.0
+hypothesis: "Alternative compact 3-layer MiniLM model (paraphrase-MiniLM-L3-v2, 384 dimensions) provides lower query embedding latency while testing semantic retrieval retention."
+changed_parameter: "embedding_model=sentence-transformers/paraphrase-MiniLM-L3-v2"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/embed-paraphrase-minilm-l3-v2.json
+summary_path: evaluation/reports/embed-paraphrase-minilm-l3-v2.md
+embedding_model: sentence-transformers/paraphrase-MiniLM-L3-v2
+embedding_batch_size: 32
+chunk_size: 800
+chunk_overlap: 100
+top_k: 5
+qdrant_mode: memory
+collection_name: ragbench_embed_paraphrase_minilm_l3_v2

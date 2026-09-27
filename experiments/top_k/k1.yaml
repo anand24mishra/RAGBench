@@ -1,0 +1,16 @@
+experiment_id: topk-1
+dataset_version: 1.0.0
+hypothesis: "Restricting retrieval to top_k=1 minimizes candidate count and search latency, but drops recall whenever the relevant passage is ranked lower than first."
+changed_parameter: "top_k=1"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/topk-1.json
+summary_path: evaluation/reports/topk-1.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 800
+chunk_overlap: 100
+top_k: 1
+qdrant_mode: memory
+collection_name: ragbench_topk_1

@@ -1,0 +1,16 @@
+experiment_id: topk-10
+dataset_version: 1.0.0
+hypothesis: "Increasing retrieval depth to top_k=10 retrieves deeper candidates to safeguard recall, measuring the latency and candidate overhead on this workload."
+changed_parameter: "top_k=10"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/topk-10.json
+summary_path: evaluation/reports/topk-10.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 800
+chunk_overlap: 100
+top_k: 10
+qdrant_mode: memory
+collection_name: ragbench_topk_10

@@ -1,0 +1,16 @@
+experiment_id: embed-all-minilm-l6-v2
+dataset_version: 1.0.0
+hypothesis: "Baseline embedding model reference (sentence-transformers/all-MiniLM-L6-v2, 384 dimensions) under the V3 experiment runner."
+changed_parameter: "none (embedding reference)"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/embed-all-minilm-l6-v2.json
+summary_path: evaluation/reports/embed-all-minilm-l6-v2.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 800
+chunk_overlap: 100
+top_k: 5
+qdrant_mode: memory
+collection_name: ragbench_embed_all_minilm_l6_v2

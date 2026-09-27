@@ -1,0 +1,16 @@
+experiment_id: chunk-400-50
+dataset_version: 1.0.0
+hypothesis: "Smaller chunks (400 characters, 50 overlap) provide finer passage granularity and may improve retrieval precision for tightly scoped questions."
+changed_parameter: "chunk_size=400, chunk_overlap=50"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/chunk-400-50.json
+summary_path: evaluation/reports/chunk-400-50.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 400
+chunk_overlap: 50
+top_k: 5
+qdrant_mode: memory
+collection_name: ragbench_chunk_400_50

@@ -1,0 +1,16 @@
+experiment_id: chunk-1200-150
+dataset_version: 1.0.0
+hypothesis: "Larger chunks (1200 characters, 150 overlap) provide wider context per chunk and may affect vector representations and retrieval ranks."
+changed_parameter: "chunk_size=1200, chunk_overlap=150"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/chunk-1200-150.json
+summary_path: evaluation/reports/chunk-1200-150.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 1200
+chunk_overlap: 150
+top_k: 5
+qdrant_mode: memory
+collection_name: ragbench_chunk_1200_150

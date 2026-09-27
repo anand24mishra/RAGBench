@@ -1,0 +1,14 @@
+experiment_id: v2-baseline
+dataset_version: 1.0.0
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/baseline.json
+summary_path: evaluation/reports/baseline.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 800
+chunk_overlap: 100
+top_k: 5
+qdrant_mode: memory
+collection_name: ragbench_v2_baseline

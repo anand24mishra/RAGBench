@@ -1,0 +1,53 @@
+{
+  "benchmark_id": "bench-v2-baseline",
+  "config": {
+    "concurrency": 1,
+    "measurement_runs": 5,
+    "warmup_runs": 2
+  },
+  "embedding_dimension": 384,
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "end_to_end_query_latency": {
+    "max_ms": 21.308875002432615,
+    "mean_ms": 11.313259159505833,
+    "min_ms": 6.160042001283728,
+    "p50_ms": 10.85520849301247,
+    "p95_ms": 17.66489839501446,
+    "p99_ms": 20.50353941696812,
+    "sample_size": 50
+  },
+  "environment": {
+    "available_accelerator": "mps",
+    "cpu_architecture": "arm64",
+    "os_name": "Darwin 25.6.0",
+    "python_version": "3.13.6",
+    "software_versions": {
+      "qdrant-client": "1.19.1",
+      "ragbench": "0.1.0",
+      "sentence-transformers": "5.4.1"
+    }
+  },
+  "model_initialization_ms": 17056.294541005627,
+  "query_count": 10,
+  "steady_state_embedding_latency": {
+    "max_ms": 19.148375009535812,
+    "mean_ms": 10.67909500154201,
+    "min_ms": 5.828957990161143,
+    "p50_ms": 10.00516650674399,
+    "p95_ms": 17.121016299643088,
+    "p99_ms": 19.133920006424887,
+    "sample_size": 50
+  },
+  "steady_state_retrieval_latency": {
+    "max_ms": 2.1780419920105487,
+    "mean_ms": 0.6187033402966335,
+    "min_ms": 0.27883300208486617,
+    "p50_ms": 0.4647710011340678,
+    "p95_ms": 1.4840972515230515,
+    "p99_ms": 2.0679551597277164,
+    "sample_size": 50
+  },
+  "timestamp": "2026-09-27T06:59:28.539121Z",
+  "total_benchmark_runtime_ms": 19936.778208008036,
+  "total_queries_measured": 50
+}

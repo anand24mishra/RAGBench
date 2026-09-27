@@ -1,0 +1,36 @@
+experiments:
+  - id: chunk-400-50
+    type: chunking
+    config: experiments/chunking/400_50.yaml
+
+  - id: chunk-800-100
+    type: chunking
+    config: experiments/chunking/800_100.yaml
+
+  - id: chunk-1200-150
+    type: chunking
+    config: experiments/chunking/1200_150.yaml
+
+  - id: topk-1
+    type: top_k
+    config: experiments/top_k/k1.yaml
+
+  - id: topk-3
+    type: top_k
+    config: experiments/top_k/k3.yaml
+
+  - id: topk-5
+    type: top_k
+    config: experiments/top_k/k5.yaml
+
+  - id: topk-10
+    type: top_k
+    config: experiments/top_k/k10.yaml
+
+  - id: embed-all-minilm-l6-v2
+    type: embeddings
+    config: experiments/embeddings/all_minilm_l6_v2.yaml
+
+  - id: embed-paraphrase-minilm-l3-v2
+    type: embeddings
+    config: experiments/embeddings/paraphrase_minilm_l3_v2.yaml

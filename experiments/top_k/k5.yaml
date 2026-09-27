@@ -1,0 +1,16 @@
+experiment_id: topk-5
+dataset_version: 1.0.0
+hypothesis: "Reference top-k retrieval depth (top_k=5) matching baseline retrieval parameters under the V3 experiment runner."
+changed_parameter: "none (top-k reference)"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/topk-5.json
+summary_path: evaluation/reports/topk-5.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 800
+chunk_overlap: 100
+top_k: 5
+qdrant_mode: memory
+collection_name: ragbench_topk_5

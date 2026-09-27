@@ -1,0 +1,16 @@
+experiment_id: topk-3
+dataset_version: 1.0.0
+hypothesis: "Retrieving top_k=3 candidates reduces candidate context size and latency compared to top_k=5, but fails queries whose evidence appears at ranks 4 or 5."
+changed_parameter: "top_k=3"
+questions_path: evaluation/dataset/questions.jsonl
+dataset_metadata_path: evaluation/dataset/metadata.json
+corpus_path: evaluation/dataset/corpus
+result_path: evaluation/reports/topk-3.json
+summary_path: evaluation/reports/topk-3.md
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+embedding_batch_size: 32
+chunk_size: 800
+chunk_overlap: 100
+top_k: 3
+qdrant_mode: memory
+collection_name: ragbench_topk_3
