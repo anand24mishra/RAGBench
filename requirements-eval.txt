@@ -1,0 +1,5 @@
+# Requirements for offline evaluation and historical benchmark reproducibility.
+# Not required for lightweight production deployment on Render Free (512 MB RAM).
+-r requirements.txt
+sentence-transformers>=3.3,<6
+torch>=2.2,<3
